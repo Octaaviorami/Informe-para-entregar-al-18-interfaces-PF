@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Sistema de Gestión de Inventarios - Demo Frontend
 
 Sistema de gestión de inventarios desarrollado en HTML, CSS y JavaScript puro. Permite gestionar productos, ventas, proveedores y generar informes.
@@ -55,3 +56,6 @@ Sistema de gestión de inventarios desarrollado en HTML, CSS y JavaScript puro. 
 - Los datos se almacenan en el localStorage del navegador
 - No requiere servidor ni base de datos
 - Solo incluye usuarios de demostración predefinidos
+=======
+# Informe-para-entregar-al-18-interfaces-PF
+>>>>>>> e60bf48d4669957c16ee502dd8aa5f09e0e58eaa
