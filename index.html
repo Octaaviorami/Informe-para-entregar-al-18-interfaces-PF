@@ -6,6 +6,125 @@
     <title>Sistema de Gestión de Inventarios - Login</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            max-width: 380px;
+            width: 90%;
+            text-align: center;
+            margin: 0;
+        }
+
+        .login-container h1 {
+            color: #333;
+            margin-bottom: 6px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .login-sub {
+            color: #666;
+            margin-bottom: 18px;
+            font-size: 12px;
+        }
+
+        .login-form-unique {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .login-form-unique label {
+            text-align: left;
+            color: #333;
+            font-weight: 500;
+            font-size: 13px;
+        }
+
+        .login-form-unique input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 13px;
+            background: #fff;
+            transition: border-color 0.3s;
+        }
+
+        .login-form-unique input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .password-field-container {
+            position: relative;
+        }
+
+        .password-toggle-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .login-form-unique button[type="submit"] {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-form-unique button[type="submit"]:hover {
+            background: #0056b3;
+        }
+
+        .login-info {
+            margin-top: 15px;
+            color: #666;
+            font-size: 11px;
+            line-height: 1.3;
+        }
+
+        .clear-btn {
+            background: #6c757d !important;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 8px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <!-- Login Container -->
@@ -22,57 +141,9 @@
                     <i class="fas fa-eye"></i>
                 </button>
             </div>
-            <label for="login-rol">Rol</label>
-            <select id="login-rol" required>
-                <option value="">Selecciona rol</option>
-                <option value="admin">Administrador</option>
-                <option value="empleado">Empleado</option>
-            </select>
             <button type="submit">Iniciar sesión</button>
         </form>
         <p class="login-info">* Demo: Admin (admin@demo.com/admin123) | Empleado (empleado@demo.com/empleado123)</p>
-        <p class="register-link">
-            ¿No tienes cuenta? <a href="#" id="show-register">Registrarse aquí</a>
-        </p>
-    </div>
-
-    <!-- Register Container -->
-    <div class="login-container" id="register-container" style="display:none;">
-        <h1>Registrar Usuario - Sistema de Inventarios</h1>
-        <p class="login-sub">Completa los datos para crear tu cuenta en el sistema de gestión de inventarios</p>
-        <form id="register-form" class="login-form-unique">
-            <label for="register-nombre">Nombre</label>
-            <input type="text" id="register-nombre" placeholder="Nombre" required>
-            <label for="register-apellido">Apellido</label>
-            <input type="text" id="register-apellido" placeholder="Apellido" required>
-
-            <label for="register-email">Email</label>
-            <input type="email" id="register-email" placeholder="correo@ejemplo.com" required>
-            <label for="register-password">Contraseña</label>
-            <div class="password-field-container">
-                <input type="password" id="register-password" placeholder="Contraseña" required>
-                <button type="button" class="password-toggle-btn" id="register-password-toggle">
-                    <i class="fas fa-eye"></i>
-                </button>
-            </div>
-            <label for="register-confirm-password">Confirmar Contraseña</label>
-            <div class="password-field-container">
-                <input type="password" id="register-confirm-password" placeholder="Confirmar contraseña" required>
-                <button type="button" class="password-toggle-btn" id="register-confirm-password-toggle">
-                    <i class="fas fa-eye"></i>
-                </button>
-            </div>
-            <label for="register-rol">Rol</label>
-            <select id="register-rol" required>
-                <option value="">Selecciona rol</option>
-                <option value="admin">Administrador</option>
-                <option value="empleado">Empleado</option>
-            </select>
-            <button type="submit">Registrar Usuario</button>
-        </form>
-        <p class="register-link">
-            ¿Ya tienes cuenta? <a href="#" id="show-login">Iniciar sesión aquí</a>
-        </p>
     </div>
 
     <script src="js/main.js"></script>

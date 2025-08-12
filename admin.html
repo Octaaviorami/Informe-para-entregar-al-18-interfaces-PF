@@ -19,6 +19,7 @@
                 <li><a href="#" data-section="principal" class="active"><i class="fas fa-home"></i> Principal</a></li>
                 <li><a href="#" data-section="productos"><i class="fas fa-box"></i> Productos</a></li>
                 <li><a href="#" data-section="proveedores"><i class="fas fa-user"></i> Proveedores</a></li>
+                <li><a href="#" data-section="usuarios"><i class="fas fa-users"></i> Usuarios</a></li>
                 <li><a href="#" data-section="ventas"><i class="fas fa-shopping-cart"></i> Ventas</a></li>
                 <li><a href="#" data-section="informes"><i class="fas fa-chart-bar"></i> Informes</a></li>
                 <li><a href="#" data-section="stock"><i class="fas fa-warehouse"></i> Stock</a></li>
@@ -85,22 +86,19 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Categoría</th>
-                                    <th>Stock Actual</th>
-                                    <th>Estado</th>
+                                    <th>Descripción</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>Nombre Producto</td>
-                                    <td>Ejemplo Categorira</td>
-                                    <td>0</td>
-                                    <td><span class="status-badge low">Agotado</span></td>
+                                    <td>Ejemplo Categoría</td>
+                                    <td>Descripción del producto agotado</td>
                                 </tr>
                                 <tr>
                                     <td>Nombre Producto</td>
-                                    <td>Ejemplo Categorira</td>
-                                    <td>0</td>
-                                    <td><span class="status-badge low">Agotado</span></td>
+                                    <td>Ejemplo Categoría</td>
+                                    <td>Descripción del producto agotado</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -273,6 +271,111 @@
                 </div>
             </section>
 
+            <!-- Sección Usuarios -->
+            <section id="usuarios-section" class="spa-section" style="display:none">
+                <div class="section-header">
+                    <h3>Usuarios</h3>
+                    <p>Gestionar usuarios del sistema</p>
+                </div>
+
+                <div class="form-section">
+                    <h4>Registrar Nuevo Usuario</h4>
+                    <form class="user-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input type="text" placeholder="Ingrese el nombre">
+                            </div>
+                            <div class="form-group">
+                                <label>Apellido</label>
+                                <input type="text" placeholder="Ingrese el apellido">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" placeholder="correo@ejemplo.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Contraseña</label>
+                                <input type="password" placeholder="Ingrese la contraseña">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Confirmar Contraseña</label>
+                                <input type="password" placeholder="Confirme la contraseña">
+                            </div>
+                            <div class="form-group">
+                                <label>Rol</label>
+                                <select>
+                                    <option value="">Selecciona rol</option>
+                                    <option value="admin">Administrador</option>
+                                    <option value="empleado">Empleado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary" style="margin-top: 20px;">
+                            <i class="fas fa-plus"></i>
+                            Registrar Usuario
+                        </button>
+                    </form>
+                </div>
+
+                <div class="table-section">
+                    <h4>Usuarios Registrados</h4>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Email</th>
+                                    <th>Rol</th>
+                                    <th>Fecha Registro</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Admin</td>
+                                    <td>Demo</td>
+                                    <td>admin@demo.com</td>
+                                    <td><span class="status-badge admin">Administrador</span></td>
+                                    <td>01-01-2024</td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Empleado</td>
+                                    <td>Demo</td>
+                                    <td>empleado@demo.com</td>
+                                    <td><span class="status-badge empleado">Empleado</span></td>
+                                    <td>01-01-2024</td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Juan</td>
+                                    <td>Pérez</td>
+                                    <td>juan.perez@empresa.com</td>
+                                    <td><span class="status-badge empleado">Empleado</span></td>
+                                    <td>15-06-2024</td>
+                                    <td>
+                                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
             <!-- Sección Ventas -->
             <section id="ventas-section" class="spa-section" style="display:none">
                 <div class="section-header">
@@ -295,7 +398,7 @@
                         </div>
 
                         <div class="product-selection">
-                            <h5><i class="fas fa-box"></i> Selección de Productos</h5>
+                            <h5><i class="fas fa-box"></i> Selección de Producto</h5>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label>Producto</label>
@@ -309,12 +412,6 @@
                                 <div class="form-group">
                                     <label>Cantidad</label>
                                     <input type="number" value="1" min="1">
-                                </div>
-                                <div class="form-group">
-                                    <button type="button" class="btn-secondary" style="width: 100%; height: 42px; margin-top: 24px;">
-                                        <i class="fas fa-plus"></i>
-                                        Agregar
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -689,5 +786,6 @@
     <script src="js/admin.js"></script>
     <script src="js/ventas.js"></script>
     <script src="js/informes.js"></script>
+    <script src="js/usuarios.js"></script>
 </body>
 </html> 

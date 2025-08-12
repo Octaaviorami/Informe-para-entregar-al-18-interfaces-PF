@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     let selectedProduct = null;
-    let productosAgregados = []; // Array para almacenar productos agregados a la venta
 
     // Función para filtrar productos
     function filterProducts(searchTerm) {
@@ -94,75 +93,6 @@ document.addEventListener('DOMContentLoaded', function() {
             <strong>Producto seleccionado:</strong> ${producto.nombre}<br>
             <strong>Precio:</strong> $${producto.precio} | <strong>Stock disponible:</strong> ${producto.stock}
         `;
-    }
-
-    // Función para mostrar productos agregados
-    function mostrarProductosAgregados() {
-        let productosContainer = document.getElementById('productos-agregados');
-        if (!productosContainer) {
-            productosContainer = document.createElement('div');
-            productosContainer.id = 'productos-agregados';
-            productosContainer.style.cssText = `
-                margin-top: 15px;
-                padding: 15px;
-                background: #f8f9fa;
-                border-radius: 8px;
-                border: 1px solid #dee2e6;
-            `;
-            
-            // Insertar después del div product-selection
-            const productSelection = document.querySelector('.product-selection');
-            if (productSelection) {
-                productSelection.parentNode.insertBefore(productosContainer, productSelection.nextSibling);
-            }
-        }
-        
-        if (productosAgregados.length === 0) {
-            productosContainer.innerHTML = '<p style="color: #6c757d; font-style: italic;">No hay productos agregados</p>';
-            return;
-        }
-        
-        let html = '<h5 style="margin-bottom: 10px; color: #495057;"><i class="fas fa-list"></i> Productos Agregados</h5>';
-        html += '<div style="max-height: 200px; overflow-y: auto;">';
-        
-        productosAgregados.forEach((item, index) => {
-            html += `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; border-bottom: 1px solid #dee2e6; background: white; margin-bottom: 5px; border-radius: 4px;">
-                    <div>
-                        <strong>${item.producto.nombre}</strong><br>
-                        <small style="color: #6c757d;">Cantidad: ${item.cantidad} | Precio: $${item.producto.precio}</small>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span style="font-weight: bold; color: #28a745;">$${(item.producto.precio * item.cantidad).toFixed(2)}</span>
-                        <button type="button" class="btn-icon" onclick="removeProducto(${index})" style="background: #dc3545; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
-        });
-        
-        html += '</div>';
-        productosContainer.innerHTML = html;
-    }
-
-    // Función para remover producto de la lista
-    window.removeProducto = function(index) {
-        productosAgregados.splice(index, 1);
-        mostrarProductosAgregados();
-        calcularTotalVenta();
-    };
-
-    // Función para calcular el total de la venta
-    function calcularTotalVenta() {
-        const total = productosAgregados.reduce((sum, item) => {
-            return sum + (item.producto.precio * item.cantidad);
-        }, 0);
-        
-        const totalElement = document.querySelector('.total-section h4');
-        if (totalElement) {
-            totalElement.textContent = `$ Total: $${total.toFixed(2)}`;
-        }
     }
 
     // Función para actualizar el total
@@ -251,73 +181,33 @@ document.addEventListener('DOMContentLoaded', function() {
         cantidadInput.addEventListener('input', updateTotal);
     }
 
-    // Event listener para el botón Agregar
-    const agregarBtn = document.querySelector('.product-selection .btn-secondary');
-    if (agregarBtn) {
-        agregarBtn.addEventListener('click', function() {
-            if (selectedProduct) {
-                const cantidad = parseInt(cantidadInput?.value) || 1;
-                
-                // Verificar si el producto ya está en la lista
-                const productoExistente = productosAgregados.find(item => item.producto.id === selectedProduct.id);
-                
-                if (productoExistente) {
-                    // Si ya existe, aumentar la cantidad
-                    productoExistente.cantidad += cantidad;
-                    alert(`Cantidad actualizada para "${selectedProduct.nombre}" (Total: ${productoExistente.cantidad} unidad/es)`);
-                } else {
-                    // Si es nuevo, agregarlo a la lista
-                    productosAgregados.push({
-                        producto: selectedProduct,
-                        cantidad: cantidad
-                    });
-                    alert(`Producto "${selectedProduct.nombre}" agregado (${cantidad} unidad/es)`);
-                }
-                
-                // Actualizar la vista de productos agregados
-                mostrarProductosAgregados();
-                calcularTotalVenta();
-                
-                // Limpiar selección
-                selectedProduct = null;
-                productSearchInput.value = '';
-                const infoElement = document.getElementById('selected-product-info');
-                if (infoElement) {
-                    infoElement.remove();
-                }
-                
-                // Resetear cantidad a 1
-                if (cantidadInput) {
-                    cantidadInput.value = '1';
-                }
-            } else {
-                alert('Por favor, selecciona un producto primero');
-            }
-        });
-    }
-
     // Event listener para el formulario de venta
     const saleForm = document.querySelector('.sale-form');
     if (saleForm) {
         saleForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            if (productosAgregados.length === 0) {
-                alert('Por favor, agrega al menos un producto a la venta');
+            if (!selectedProduct) {
+                alert('Por favor, selecciona un producto para la venta');
+                return;
+            }
+            
+            const fecha = document.querySelector('input[type="date"]').value;
+            const cliente = document.querySelector('input[placeholder="Ingrese el nombre del cliente"]').value;
+            const cantidad = parseInt(cantidadInput?.value) || 1;
+            
+            if (!fecha || !cliente) {
+                alert('Por favor, completa todos los campos obligatorios');
                 return;
             }
             
             // Aquí se procesaría la venta con el backend
-            const totalVenta = productosAgregados.reduce((sum, item) => {
-                return sum + (item.producto.precio * item.cantidad);
-            }, 0);
+            const totalVenta = selectedProduct.precio * cantidad;
             
-            alert(`Venta registrada exitosamente!\n\nTotal: $${totalVenta.toFixed(2)}\nProductos: ${productosAgregados.length}`);
+            alert(`Venta registrada exitosamente!\n\nCliente: ${cliente}\nProducto: ${selectedProduct.nombre}\nCantidad: ${cantidad}\nTotal: $${totalVenta.toFixed(2)}`);
             
-            // Limpiar todo después de registrar la venta
-            productosAgregados = [];
-            mostrarProductosAgregados();
-            calcularTotalVenta();
+            // Limpiar formulario después de registrar la venta
+            saleForm.reset();
             selectedProduct = null;
             productSearchInput.value = '';
             const infoElement = document.getElementById('selected-product-info');
@@ -327,6 +217,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (cantidadInput) {
                 cantidadInput.value = '1';
             }
+            
+            // Actualizar total
+            updateTotal();
         });
     }
 });
